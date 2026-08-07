@@ -1,9 +1,136 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-space-950: #05040c;
+  --color-space-900: #0a0716;
+  --color-space-800: #130e24;
+  --color-space-700: #1e1735;
+
+  --color-dawn-start: #fbbf24;
+  --color-dawn-end: #fb7185;
+  --color-dusk-start: #818cf8;
+  --color-dusk-end: #c084fc;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
+  background: var(--color-space-950);
+}
+
+/* Two drifting star layers at different tile sizes/speeds/directions for
+   cheap parallax depth — pure CSS, no canvas/JS, GPU-friendly since the
+   gradients themselves never change, only the tiled position. */
+.starfield-near,
+.starfield-far {
+  position: fixed;
+  inset: -10% -10% -10% -10%;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: repeat;
+}
+
+.starfield-far {
+  background-image:
+    radial-gradient(1px 1px at 40px 60px, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 130px 150px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 210px 40px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 270px 190px, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 330px 100px, rgba(255, 255, 255, 0.45), transparent);
+  background-size: 380px 280px;
+  animation: drift-far 220s linear infinite;
+  opacity: 0.6;
+}
+
+.starfield-near {
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 20px, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1.5px 1.5px at 180px 120px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 20px 160px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 260px 60px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 320px 210px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 110px 230px, rgba(255, 255, 255, 0.7), transparent);
+  background-size: 300px 260px;
+  animation: drift-near 140s linear infinite;
+}
+
+@keyframes drift-far {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -380px 280px;
+  }
+}
+
+@keyframes drift-near {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 300px -260px;
+  }
+}
+
+/* Soft twilight glow low on the viewport, evoking a horizon at dusk/dawn. */
+.horizon-glow {
+  position: fixed;
+  left: 50%;
+  bottom: -20%;
+  width: 140vw;
+  height: 60vh;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 60% 100% at 50% 100%,
+    rgba(129, 140, 248, 0.22),
+    rgba(251, 113, 133, 0.08) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield-near,
+  .starfield-far {
+    animation: none;
+  }
+  .animate-fade-up,
+  .animate-glow-pulse {
+    animation: none;
+  }
 }

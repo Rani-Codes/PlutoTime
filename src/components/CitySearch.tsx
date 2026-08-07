@@ -28,10 +28,10 @@ export function CitySearch({ onSelect }: CitySearchProps) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for your city…"
         aria-label="Search for your city"
-        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-slate-100 placeholder-slate-500 focus:border-slate-400 focus:outline-none"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-100 placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-dusk-start/60 focus:bg-white/[0.07] focus:outline-none"
       />
       {results.length > 0 && (
-        <ul className="mt-2 divide-y divide-slate-800 rounded-lg border border-slate-800 bg-slate-900">
+        <ul className="mt-2 divide-y divide-white/5 overflow-hidden rounded-xl border border-white/10 bg-space-900/90 backdrop-blur-md">
           {results.map((city) => (
             <li key={`${city.name}-${city.country}-${city.lat}-${city.lon}`}>
               <button
@@ -41,9 +41,9 @@ export function CitySearch({ onSelect }: CitySearchProps) {
                   setQuery('')
                   setResults([])
                 }}
-                className="w-full px-4 py-2 text-left text-slate-200 hover:bg-slate-800"
+                className="w-full px-4 py-2.5 text-left text-slate-200 transition-colors hover:bg-white/[0.06]"
               >
-                {city.name}, {city.country}
+                {city.name}, <span className="text-slate-500">{city.country}</span>
               </button>
             </li>
           ))}
