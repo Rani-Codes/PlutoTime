@@ -71,6 +71,16 @@ const NIGHT_FLOOR_ILLUMINANCE_LUX = 0.0005
  * "Earth noon lux ÷ ~1600" (the inverse-square falloff from Pluto's ~40 AU
  * average distance from the Sun vs Earth's 1 AU: 40² = 1600), which lands
  * independent sources in a ~60-90 lux range; we use the midpoint.
+ *
+ * Known inconsistency: evaluating this curve at PLUTO_TIME_ELEVATION_DEGREES
+ * (-1.5°, see plutoTime.ts) gives ~1.6x this value, not 1.0x, even though
+ * Pluto Time is *defined* as "brightness matches Pluto noon". The two
+ * figures come from independently-sourced literature (a popular-science
+ * elevation threshold vs. an inverse-square lux estimate) that don't
+ * perfectly reconcile — deliberately not force-fit to agree, since doing so
+ * would fabricate precision neither source actually has. Both individual
+ * numbers are within their own disclaimed error bars; the ratio between
+ * them just isn't exactly 1.
  */
 const PLUTO_NOON_ILLUMINANCE_LUX = 75
 
@@ -151,7 +161,7 @@ export function estimateIlluminanceLux(elevationDegrees: number): number {
     )
   }
 
-  if (elevationDegrees > ASTRONOMICAL_TWILIGHT_ELEVATION_DEGREES) {
+  if (elevationDegrees >= ASTRONOMICAL_TWILIGHT_ELEVATION_DEGREES) {
     return logLinearInterpolate(
       elevationDegrees,
       NAUTICAL_TWILIGHT_ELEVATION_DEGREES,
