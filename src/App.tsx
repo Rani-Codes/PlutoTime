@@ -7,15 +7,17 @@ function App() {
   const [location, setLocation] = useState<Location | null>(null)
 
   return (
-    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-space-950 px-4 py-16 font-display text-slate-100">
+    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-space-950 px-4 py-16 text-slate-100">
       <div className="starfield-far" />
       <div className="starfield-near" />
       <div className="horizon-glow" />
 
       <div className="relative z-10 flex w-full flex-col items-center gap-12">
         <header className="animate-fade-up text-center">
-          <p className="text-xs font-medium tracking-[0.3em] text-slate-500 uppercase">Earth ↔ Pluto</p>
-          <h1 className="mt-3 bg-gradient-to-r from-dawn-end via-dusk-start to-dusk-end bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+          <p className="font-mono text-xs font-medium tracking-[0.3em] text-slate-500 uppercase">
+            Earth ↔ Pluto
+          </p>
+          <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl">
             Pluto Time
           </h1>
           <p className="mx-auto mt-3 max-w-sm text-sm text-balance text-slate-400">

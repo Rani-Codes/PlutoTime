@@ -28,7 +28,7 @@ export function CitySearch({ onSelect }: CitySearchProps) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for your city…"
         aria-label="Search for your city"
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-100 placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-dusk-start/60 focus:bg-white/[0.07] focus:outline-none"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-100 placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-gold/60 focus:bg-white/[0.07] focus:outline-none"
       />
       {results.length > 0 && (
         <ul className="mt-2 divide-y divide-white/5 overflow-hidden rounded-xl border border-white/10 bg-space-900/90 backdrop-blur-md">

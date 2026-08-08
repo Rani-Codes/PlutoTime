@@ -1,17 +1,25 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-space-950: #05040c;
-  --color-space-900: #0a0716;
-  --color-space-800: #130e24;
-  --color-space-700: #1e1735;
+  /* Neutral graphite-navy, not the purple-leaning near-black of the first pass. */
+  --color-space-950: #05070a;
+  --color-space-900: #0a0d13;
+  --color-space-800: #12161f;
+  --color-space-700: #1c212e;
 
-  --color-dawn-start: #fbbf24;
-  --color-dawn-end: #fb7185;
-  --color-dusk-start: #818cf8;
-  --color-dusk-end: #c084fc;
+  /* Palette pulled from actual New Horizons imagery of Pluto's surface —
+     rust/copper tholin regions paired with pale nitrogen-ice frost —
+     instead of a generic sunset/purple gradient. Solid colors, no gradients. */
+  --color-dawn: #c9723f;
+  --color-dawn-deep: #8a4a2b;
+  --color-dusk: #5fa8bf;
+  --color-dusk-deep: #35657a;
+  --color-gold: #e3bd63;
+  --color-alert: #f0665a;
+  --color-cream: #f3ead9;
 
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
 }
 
 :root {
@@ -87,8 +95,8 @@ body {
   transform: translateX(-50%);
   background: radial-gradient(
     ellipse 60% 100% at 50% 100%,
-    rgba(129, 140, 248, 0.22),
-    rgba(251, 113, 133, 0.08) 45%,
+    rgba(95, 168, 191, 0.18),
+    rgba(201, 114, 63, 0.09) 45%,
     transparent 75%
   );
   pointer-events: none;
